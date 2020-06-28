@@ -1,0 +1,61 @@
+{% extends "data/base.html" %}
+
+{% block title %}
+<title>u/{{username}}</title>
+{% endblock title %}
+
+
+
+{% block content %}
+<div style="background-color:#FF5700; border: 5px solid #d64700;">
+    <h1 align="center" style="color:#FFFFFF" >Profile of <a href={{link}} target="_blank" style="color:#eaeaea">u/{{ username }}</a></h1>
+</div>
+
+<hr/>
+{% include "data/navbar.html" %}
+
+<div align="center">
+    <h2><a href={{link}} style="color:#FF5700" target="_blank">u/{{username}}</a></h2>
+    {% if maindata.over_18 %}
+        <p style="color:red"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Achtung.svg/220px-Achtung.svg.png" width="16" height="16"/> NSFW account</p>
+    {% endif %}
+
+    {% if maindata.previous_names %}
+        <h3>Previous names:</h3>
+        <ul>
+        {% for name in maindata.previos_name %}
+            <li>{{name}}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p>USER ID: <b>{{id}}</b></p>
+    <img src={{avatar}} width="200" height="200"/>
+    <p><b>Description</b>: {{maindata.public_description}}</p>
+    <p><b>{{link_karma}}</b> link karma, <b>{{comment_karma}}</b> comment karma, <b>{{karma}}</b> karma.</p>
+    <p>Profile created on <b>{{created_at}}</b>, is around <b>{{age}}</b> old.</p>
+
+    {% if maindata.title %}
+        <p>Has a user-subreddit called "{{maindata.title}}" on his/her <a href={{link}} target="_blank">profile</a></p>
+    {% endif %}
+
+    {% if premium %}
+        <p>Has Reddit premium</p>
+    {% else %}
+        <p>Does not have Reddit premium</p>
+    {% endif %}
+
+    {% if mod %}
+        <p>Has a mod role</p>
+    {% else %}
+        <p>Does not have a mod role</p>
+    {% endif %}
+
+    {% if premium %}
+        <p>Literally works for Reddit</p>
+    {% else %}
+        <p>Does not work at Reddit</p>
+    {% endif %}
+
+</div>
+{% endblock content %}
