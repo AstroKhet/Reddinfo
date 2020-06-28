@@ -1,0 +1,34 @@
+{% extends "data/base.html" %}
+
+{% block title %}
+<title>Choose action</title>
+{% endblock title %}
+
+
+
+{% block content %}
+{% if not username %}
+<div style="background-color:#FF5700; border: 5px solid #d64700;">
+    <h1 align="center" style="color:#FFFFFF" >You are searching for no one. <a href="{% url 'User_search' %}">Go back.</a></h1>
+</div>
+
+{% else %}
+<div style="background-color:#FF5700; border: 5px solid #d64700;">
+    <h1 align="center" style="color:#FFFFFF" >What would you like to know about <a href={{link}} target="_blank" style="color:#eaeaea">u/{{ username }}</a> ?</h1>
+</div>
+
+<hr/>
+
+<div align="center" style="background-color:#ffdd80; border:5px solid #c7ac63">
+    <a href="{% url 'Posts' %}" style="font-size:22px; color:#ff8400"><b>See posts data</b></a><br/>
+    <a href="{% url 'Comments' %}" style="font-size:22px; color:#ff8400"><b>See comments data</b></a><br/>
+    <a href="{% url 'Profile' %}" style="font-size:22px; color:#ff8400"><b>See profile data</b></a><br/>
+    <p><i>These may take some time to load...</i></p>
+</div>
+
+<hr/>
+<div style="background-color:#4a4a4a; border:5px solid #1f1f1f;">
+    <h2 align="center"  style="color:#AAAAAA">or... <a href="{% url 'User_search' %}"  style="color:#DDDDDD">Search for somebody else</a></h2>
+</div>
+{% endif %}
+{% endblock content %}

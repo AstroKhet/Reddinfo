@@ -1,0 +1,17 @@
+{% extends "data/base.html" %}
+
+{% block title %}
+<title>Bruh</title>
+{% endblock title %}
+
+
+
+{% block content %}
+<h1>404 Error: No such user name "u/{{username}}"</h1>
+<h3>The account could have been suspended or deleted.</h3>
+
+<hr/>
+<div style="background-color:#4a4a4a; border:5px solid #1f1f1f;">
+    <h2 align="center"  style="color:#AAAAAA"><a href="{% url 'User_search' %}"  style="color:#DDDDDD">Search for somebody else</a></h2>
+</div>
+{% endblock content %}

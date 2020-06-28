@@ -1,0 +1,79 @@
+{% extends "data/base.html" %}
+
+{% block title %}
+<title>Posts data</title>
+{% endblock title %}
+
+
+
+{% block content %}
+{% if not username %}
+<div style="background-color:#FF5700; border: 5px solid #d64700;">
+    <h1 align="center" style="color:#FFFFFF" >You are searching for no one. <a href="{% url 'User_search' %}">Go back.</a></h1>
+</div>
+
+{% else %}
+<div style="background-color:#FF5700; border: 5px solid #d64700;">
+    <h1 align="center" style="color:#FFFFFF" >Posts data of <a href={{link}} target="_blank" style="color:#eaeaea">u/{{ username }}</a></h1>
+</div>
+
+<hr/>
+{% include "data/navbar.html" %}
+
+<h2>General information about u/{{ username }} (in TOP 1000 posts)</h2>
+
+<div>
+    <ul>
+                <li style="font-size:18px"><img src="https://www.redditinc.com/assets/images/site/reddit-logo.png" width="16" height="16"><b> Link Karma</b>: {{ redditor.link_karma }}</li>
+        <li style="font-size:18px"><img src="https://cdn2.iconfinder.com/data/icons/halloween-part-two/64/halloween_part2_Line-14-512.png" width="16" height="16"/> <b> Upvote ratio</b>: {{ ratio }}</li>
+        <li style="font-size:18px"><img src="https://i.redd.it/rv664dwlmjy21.png" width="16" height="16"><b> Total upvotes</b>: {{ total_upvotes }}</li>
+        <li style="font-size:18px"><img src="https://i.redd.it/ehvf1j8zbhv01.png" width="16" height="16"><b> Total downvotes</b>: {{ total_downvotes }}</li>
+        <li style="font-size:18px"><img src="https://www.redditstatic.com/gold/awards/icon/platinum_512.png" width="16" height="16"><b> Total awards received</b>: {{ award_data.0 }}</li>
+        <li style="font-size:18px"><img src="https://www.redditstatic.com/desktop2x/img/gold/badges/award-gold-large.png" width="16" height="16"><b> Normal awards received</b>: {{ award_data.1 }}</li>
+        <li style="font-size:18px"><img src="https://www.redditstatic.com/desktop2x/img/gold/badges/award-silver-large.png" width="16" height="16"><b> Community awards received</b>: {{ award_data.2 }}</li>
+        <li style="font-size:18px"><img src="https://i.dlpng.com/static/png/185509_preview.png" width="16" height="16"><b> Total coins given (normal awards)</b>: {{ coin_data.1 }}</li>
+        <li style="font-size:18px"><img src="https://i.dlpng.com/static/png/185509_preview.png" width="16" height="16"><b> Total coins given (community awards)</b>: {{ coin_data.2 }}</li>
+        <li style="font-size:18px"><img src="https://i.dlpng.com/static/png/185509_preview.png" width="16" height="16"><b> Total coins given (all awards)</b>: {{ coin_data.0 }}</li>
+    </ul>
+</div>
+
+<div>
+    <h3><u>Normal reddit awards acquired by u/{{ username }}</u></h3>
+    <ul>
+    {% for award, count in normal_awards.items %}
+        <li style="font-size:18px"><b>{{award}}</b>: {{count}}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <h3><u>Community awards acquired by u/{{ username }}</u></h3>
+    <ul>
+    {% for k, v in community_awards.items %}
+        <li style="font-size:18px"><b>r/{{k}}</b></li>
+        <ul>
+            {% for awardName, awardData in v.items %}
+                <li style="font-size:15px"><img src={{awardData.1}} width="16" height="16"><b> [{{awardData.2}} coins] {{awardName}}</b>: {{awardData.0}}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    </ul>
+</div>
+
+<hr/>
+<div>
+    <h3><u>Link to top 1000 posts of u/{{username}}</u></h3>
+    <ul>
+        {% for k, v in posts.items %}
+        <li style="font-size:18px"><b>r/{{k}}</b></li>
+            <ul>
+                {% for url, postData in v.items %}
+                    <li style="font-size:15px;"><a href={{url}} target="_blank">{{postData.0}}</a> | {{ postData.1}}<img src="https://i.redd.it/rv664dwlmjy21.png" width="16" height="16"> {{ postData.2 }}<img src="https://i.redd.it/ehvf1j8zbhv01.png" width="16" height="16"></li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock content %}
