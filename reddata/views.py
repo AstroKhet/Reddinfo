@@ -7,10 +7,10 @@ import time
 # Create your views here.
 
 
-client_id = 'r62MNtXsM0_EMQ'
-client_secret = 'R_2e10JpNKVJt8cn5w-pM51-wjM'
+client_id = 'hidden'
+client_secret = 'hidden'
 username = 'SomeLameScrapingBot'
-password = 'EC$zn#*.J8GaVRL'
+password = 'hidden'
 user_agent = 'RedditScraper'
 
 reddit = praw.Reddit(client_id=client_id, client_secret=client_secret, username=username, password=password,
